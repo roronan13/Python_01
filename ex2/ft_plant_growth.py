@@ -3,7 +3,7 @@ class Plant:
         self.name = name
         self.height = height
         self.plant_age = plant_age
-    
+
     def grow(self, days) -> None:
         self.height += days
 
