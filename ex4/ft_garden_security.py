@@ -27,11 +27,15 @@ class Plant:
         return self.__age
 
     def SecurePlant(self, height, age) -> None:
-        self.set_height(self, height)
-        self.set_age(self, age)
+        if self.set_height(height) < 0:
+            print("Security : wrong height !")
+        if self.set_age(age) < 0:
+            print("Security : wrong age !")
 
 
 if __name__ == "__main__":
     plant1 = Plant("Rose", 0, 0)
     plant1.SecurePlant(int(input("Height : ")), int(input("Age : ")))
     print(f'Plant created : {plant1.name}')
+    print(f'Height updated : {plant1.get_height()}cm [OK]')
+    print(f'Age updated : {plant1.get_age()}days [OK]')
