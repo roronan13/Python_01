@@ -26,16 +26,29 @@ class Plant:
     def get_age(self) -> int:
         return self.__age
 
-    def SecurePlant(self, height, age) -> None:
+    def SecurePlant(self, height, age) -> int:
         if self.set_height(height) < 0:
             print("Security : wrong height !")
+            return -1
         if self.set_age(age) < 0:
             print("Security : wrong age !")
+            return -1
+        return 0
 
 
 if __name__ == "__main__":
-    plant1 = Plant("Rose", 0, 0)
-    plant1.SecurePlant(int(input("Height : ")), int(input("Age : ")))
-    print(f'Plant created : {plant1.name}')
-    print(f'Height updated : {plant1.get_height()}cm [OK]')
-    print(f'Age updated : {plant1.get_age()}days [OK]')
+    plant1 = Plant("Rose", -1, -1)
+    if plant1.SecurePlant(int(input("Height : ")), int(input("Age : "))) >= 0:
+        print(f'Plant created : {plant1.name}')
+        print(f'Height updated : {plant1.get_height()}cm [OK]')
+        print(f'Age updated : {plant1.get_age()}days [OK]')
+    plant2 = Plant("Lila", -1, -1)
+    if plant2.SecurePlant(int(input("Height : ")), int(input("Age : "))) >= 0:
+        print(f'Plant created : {plant2.name}')
+        print(f'Height updated : {plant2.get_height()}cm [OK]')
+        print(f'Age updated : {plant2.get_age()}days [OK]')
+    print("Current plants : ")
+    if plant1.get_height() > -1 and plant1.get_age() > -1:
+        print(f'{plant1.name} ({plant1.get_height()}cm, {plant1.get_age()}days)')
+    if plant2.get_height() > -1 and plant2.get_age() > -1:
+        print(f'{plant2.name} ({plant2.get_height()}cm, {plant2.get_age()}days)')
