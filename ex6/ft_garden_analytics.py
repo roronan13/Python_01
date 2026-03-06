@@ -1,9 +1,8 @@
 class Plant:
-    def __init__(self, name: str, height: int, age: int, owner: str) -> None:
-        self.name = name
+    def __init__(self, plant_name: str, height: int, age: int) -> None:
+        self.plant_name = plant_name
         self.__height = height
         self.__age = age
-        self.owner = owner
 
 
 class FloweringPlant(Plant):
@@ -26,32 +25,26 @@ class Owner:
 
 class GardenManager:
     def __init__(self, name: str) -> None:
+        self.name = name
         self.owners = []
         self.plants = []
         self.number_of_owners = 0
         self.number_of_plants = 0
 
     def AddOwner(self, owner: Owner) -> None:
-        self.owners.append(owner_name)
+        self.owners.append(owner)
         self.number_of_owners += 1
-        self.owners.owner_name.owner_plants = []
 
     def GetNumberOwners(self) -> int:
         return self.number_of_owners
 
-    def AddPlant(self, plant_name: str, owner_name: str) -> None:
-        self.plants.append(plant_name)
+    def AddPlant(self, plant: Plant, owner: Owner) -> None:
+        self.plants.append(plant)
         self.number_of_plants += 1
-        for self.owner_name in self.owners:
-            if self.owner_name == owner_name:
-                self.owner_name.owner_plants.append(plant_name)
-
-
-class Owner:
-    def __init__(self, owner_name: str) -> None:
-        self.owner_name = owner_name
-        self.plants = []
-        self.number_of_plants = 0
+        for self.owner in self.owners:
+            if self.owner == Owner:
+                Owner.plants.append(Plant)
+                Owner.number_of_plants += 1
 
 
     # def GardenStats(self) -> None:
@@ -62,12 +55,16 @@ class Owner:
 
 if __name__ == "__main__":
     My_Garden = GardenManager("My Garden")
-    My_Garden.AddOwner("Ronan")
-    My_Garden.AddOwner("Jean")
-    My_Garden.AddOwner("Jacques")
+    Ronan = Owner("Ronan")
+    Jean = Owner("Jean")
+    Jacques = Owner("Jacques")
+    Lila = Plant("Lila", 10, 5)
+    My_Garden.AddOwner(Ronan)
+    My_Garden.AddOwner(Jean)
+    My_Garden.AddOwner(Jacques)
+    My_Garden.AddPlant(Lila, Ronan)
     for My_Garden.owner in My_Garden.owners:
         print(f'{My_Garden.owner}')
-        for My_Garden.owner.name in My_Garden.owners:
-            print(f'  --  {My_Garden.owner.name}')
+        for My_Garden.owners.plants in My_Garden.owners.plants:
+            print(f'  --  {My_Garden.owners.plant_name}  --  ')
     print(f'Total gardens managed : {My_Garden.GetNumberOwners()}')
-    My_Garden.AddPlant("Lila", "Ronan")
