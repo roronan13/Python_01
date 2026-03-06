@@ -54,4 +54,6 @@ if __name__ == "__main__":
     print(f'{Rose.name} (Flower) : {Rose.height}cm, {Rose.age} days, {Rose.color} color')
     Rose.is_bloomed()
     Oak = Tree("Oak", 3000, 50, 20)
+    print(f'{Oak.name} (Tree) : {Oak.height}cm, {Oak.age} days, {Oak.trunk_diameter}cm diameter')
+    print(f'{Oak.name} provides {Oak.produce_shade()} square meters of shade')
     
