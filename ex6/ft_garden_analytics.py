@@ -17,6 +17,13 @@ class PrizeFlower(FloweringPlant):
         super().__init__(name, height, age, flowered)
 
 
+class Owner:
+    def __init__(self, owner_name: str) -> None:
+        self.owner_name = owner_name
+        self.plants = []
+        self.number_of_plants = 0
+
+
 class GardenManager:
     def __init__(self, name: str) -> None:
         self.owners = []
@@ -24,27 +31,28 @@ class GardenManager:
         self.number_of_owners = 0
         self.number_of_plants = 0
 
-    def AddOwner(self, owner: str) -> None:
-        self.owners.append(owner)
+    def AddOwner(self, owner: Owner) -> None:
+        self.owners.append(owner_name)
         self.number_of_owners += 1
-        self.owner_plants = []
+        self.owners.owner_name.owner_plants = []
 
     def GetNumberOwners(self) -> int:
         return self.number_of_owners
 
-    def AddPlant(self, name: str, owner: str) -> None:
-        self.plants.append(name)
+    def AddPlant(self, plant_name: str, owner_name: str) -> None:
+        self.plants.append(plant_name)
         self.number_of_plants += 1
-        for self.owner in self.owners:
-            if self.owner == "owner":
-                self.owner_plants.append(name)
+        for self.owner_name in self.owners:
+            if self.owner_name == owner_name:
+                self.owner_name.owner_plants.append(plant_name)
 
 
 class Owner:
-    def __init__(self, owner_name: str):
+    def __init__(self, owner_name: str) -> None:
         self.owner_name = owner_name
         self.plants = []
         self.number_of_plants = 0
+
 
     # def GardenStats(self) -> None:
 
@@ -63,4 +71,3 @@ if __name__ == "__main__":
             print(f'  --  {My_Garden.owner.name}')
     print(f'Total gardens managed : {My_Garden.GetNumberOwners()}')
     My_Garden.AddPlant("Lila", "Ronan")
-
