@@ -9,14 +9,26 @@ class Plant:
 
 
 class FloweringPlant(Plant):
-    def __init__(self, name: str, height: int, age: int, flowered: bool):
+    def __init__(self, name: str, height: int, age: int, flowered: bool, color: str):
         super().__init__(name, height, age)
+        self.flowered = flowered
+        self.color = color
+
+    def PrintFlowered(self) -> None:
+        if self.flowered:
+            print("(blooming)")
+        else:
+            print("(not blooming)")
 
 
 class PrizeFlower(FloweringPlant):
     def __init__(self, name: str, height: int, age: int, flowered: bool,
-                 prize: int):
-        super().__init__(name, height, age, flowered)
+                 color: str, prize: int):
+        super().__init__(name, height, age, flowered, color)
+        self.prize = prize
+
+    # def get_info(self) -> str:
+    #     return f""
 
 
 class Owner:
@@ -63,8 +75,8 @@ if __name__ == "__main__":
     Jean = Owner("Jean")
     Jacques = Owner("Jacques")
     Lila = Plant("Lila", 10, 5)
-    Rose = Plant("Rose", 20, 10)
-    Tulipe = Plant("Tulipe", 50, 50)
+    Rose = FloweringPlant("Rose", 20, 10, True, "red")
+    Tulipe = PrizeFlower("Tulipe", 50, 50, False, "blue", 10)
     My_Garden.create_garden_network(Ronan)
     My_Garden.create_garden_network(Jean)
     My_Garden.create_garden_network(Jacques)
@@ -72,8 +84,11 @@ if __name__ == "__main__":
     My_Garden.AddPlant(Rose, Jacques)
     My_Garden.AddPlant(Tulipe, Ronan)
     for owner in My_Garden.owners:
-        print(f'{owner.owner_name}\'s Garden Report')
+        print(f'\n{owner.owner_name}\'s Garden Report')
         print("Plants in garden:")
         for plant in owner.plants:
-            print(f'  --  {plant.plant_name}  --  {plant.GetHeight()}cm')
-    print(f'Total gardens managed : {My_Garden.GetNumberOwners()}')
+            if type(plant) == Plant:
+                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
+            if type(plant) == FloweringPlant:
+                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
+    print(f'\nTotal gardens managed : {My_Garden.GetNumberOwners()}')
