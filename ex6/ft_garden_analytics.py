@@ -14,11 +14,11 @@ class FloweringPlant(Plant):
         self.flowered = flowered
         self.color = color
 
-    def PrintFlowered(self) -> None:
+    def PrintFlowered(self) -> str:
         if self.flowered:
-            print("(blooming)")
+            return ("(blooming)")
         else:
-            print("(not blooming)")
+            return ("(not blooming)")
 
 
 class PrizeFlower(FloweringPlant):
@@ -90,5 +90,5 @@ if __name__ == "__main__":
             if type(plant) == Plant:
                 print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
             if type(plant) == FloweringPlant:
-                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
+                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm, {plant.color} flowers {plant.PrintFlowered()}')
     print(f'\nTotal gardens managed : {My_Garden.GetNumberOwners()}')
