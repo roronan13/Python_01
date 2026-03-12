@@ -66,9 +66,6 @@ class GardenManager:
     # def GardenStats(self) -> None:
 
 
-    # def create_garden_network(self) -> None:
-
-
 if __name__ == "__main__":
     My_Garden = GardenManager("My Garden")
     Ronan = Owner("Ronan")
@@ -87,8 +84,10 @@ if __name__ == "__main__":
         print(f'\n{owner.owner_name}\'s Garden Report')
         print("Plants in garden:")
         for plant in owner.plants:
-            if type(plant) == Plant:
+            if type(plant) is Plant:
                 print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
-            if type(plant) == FloweringPlant:
+            if type(plant) is FloweringPlant:
                 print(f'  - {plant.plant_name} : {plant.GetHeight()}cm, {plant.color} flowers {plant.PrintFlowered()}')
+            if type(plant) is PrizeFlower:
+                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm, {plant.color} flowers {plant.PrintFlowered()}, Prize points : {plant.prize}')
     print(f'\nTotal gardens managed : {My_Garden.GetNumberOwners()}')
