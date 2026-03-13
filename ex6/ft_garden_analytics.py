@@ -10,13 +10,15 @@ class Plant:
     def PrintInfo(self) -> str:
         return (f"- {self.plant_name} : {self.GetHeight()}cm")
 
-    def GetSpecificType(self) -> str:
+    @staticmethod
+    def GetSpecificType() -> str:
         return ("regular")
 
     def Grow(self) -> None:
         self.__height += 1
 
-    def GetPrizePoints(self) -> int:
+    @staticmethod
+    def GetPrizePoints() -> int:
         return 0
 
 
@@ -37,10 +39,12 @@ class FloweringPlant(Plant):
         else:
             return ("(not blooming)")
 
-    def GetSpecificType(self) -> str:
+    @staticmethod
+    def GetSpecificType() -> str:
         return ("flowering")
 
-    def GetPrizePoints(self) -> int:
+    @staticmethod
+    def GetPrizePoints() -> int:
         return 0
 
 
@@ -54,7 +58,8 @@ class PrizeFlower(FloweringPlant):
         return (f"- {self.plant_name} : {self.GetHeight()}cm, {self.color} "
                 f"flowers {self.PrintFlowered()}, Prize points : {self.prize}")
 
-    def GetSpecificType(self) -> str:
+    @staticmethod
+    def GetSpecificType() -> str:
         return ("prize")
 
     def GetPrizePoints(self) -> int:
@@ -136,9 +141,6 @@ class GardenManager:
                 print(f"{owner.owner_name}: {owner.total_prize}", end="")
             i += 1
         print("")
-
-
-    # def GardenStats(self) -> None:
 
 
 if __name__ == "__main__":
