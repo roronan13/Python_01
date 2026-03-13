@@ -6,19 +6,33 @@ class Plant:
 
     def GetHeight(self) -> int:
         return self.__height
+    
+    def PrintInfo(self) -> str:
+        return (f"- {self.plant_name} : {self.GetHeight()}cm")
+    
+    def GetSpecificType(self) -> str:
+        return ("regular")
 
 
 class FloweringPlant(Plant):
-    def __init__(self, name: str, height: int, age: int, flowered: bool, color: str):
+    def __init__(self, name: str, height: int, age: int, flowered: bool,
+                 color: str):
         super().__init__(name, height, age)
         self.flowered = flowered
         self.color = color
 
+    def PrintInfo(self) -> str:
+        return (f"- {self.plant_name} : {self.GetHeight()}cm, {self.color} "
+                f"flowers {self.PrintFlowered()}")
+        
     def PrintFlowered(self) -> str:
         if self.flowered:
             return ("(blooming)")
         else:
             return ("(not blooming)")
+        
+    def GetSpecificType(self) -> str:
+        return ("flowering")
 
 
 class PrizeFlower(FloweringPlant):
@@ -27,8 +41,12 @@ class PrizeFlower(FloweringPlant):
         super().__init__(name, height, age, flowered, color)
         self.prize = prize
 
-    # def get_info(self) -> str:
-    #     return f""
+    def PrintInfo(self) -> str:
+        return (f"- {self.plant_name} : {self.GetHeight()}cm, {self.color} "
+                f"flowers {self.PrintFlowered()}, Prize points : {self.prize}")
+    
+    def GetSpecificType(self) -> str:
+        return ("prize")
 
 
 class Owner:
@@ -36,6 +54,12 @@ class Owner:
         self.owner_name = owner_name
         self.plants = []
         self.number_of_plants = 0
+        self.regular = 0
+        self.flowering = 0
+        self.prize = 0
+
+    def PrintSpecificNumber(self) -> str:
+        return (f"Plant types : {self.regular} regular, {self.flowering} flowering, {self.prize} prize flowers")
 
 
 class GardenManager:
@@ -56,10 +80,17 @@ class GardenManager:
     def AddPlant(self, plant: Plant, owner: Owner) -> None:
         self.plants.append(plant)
         self.number_of_plants += 1
+        self.specific_type = plant.GetSpecificType()
         for self.owner in self.owners:
             if self.owner == owner:
                 owner.plants.append(plant)
                 owner.number_of_plants += 1
+                if self.specific_type == "regular":
+                    owner.regular += 1
+                if self.specific_type == "flowering":
+                    owner.flowering += 1
+                if self.specific_type == "prize":
+                    owner.prize += 1
         print(f'Added {plant.plant_name} to {owner.owner_name}\'s garden')
 
 
@@ -81,13 +112,9 @@ if __name__ == "__main__":
     My_Garden.AddPlant(Rose, Jacques)
     My_Garden.AddPlant(Tulipe, Ronan)
     for owner in My_Garden.owners:
-        print(f'\n{owner.owner_name}\'s Garden Report')
+        print(f'\n=== {owner.owner_name}\'s Garden Report ===')
         print("Plants in garden:")
         for plant in owner.plants:
-            if type(plant) is Plant:
-                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm')
-            if type(plant) is FloweringPlant:
-                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm, {plant.color} flowers {plant.PrintFlowered()}')
-            if type(plant) is PrizeFlower:
-                print(f'  - {plant.plant_name} : {plant.GetHeight()}cm, {plant.color} flowers {plant.PrintFlowered()}, Prize points : {plant.prize}')
+            print(plant.PrintInfo())
+        print(owner.PrintSpecificNumber())
     print(f'\nTotal gardens managed : {My_Garden.GetNumberOwners()}')
