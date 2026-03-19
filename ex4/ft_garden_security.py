@@ -5,7 +5,7 @@ class Plant:
         self.__age = age
 
     def set_height(self, height) -> int:
-        if height <= 200 and height >= 0:
+        if height >= 0:
             self.__height = height
             return 0
         else:
@@ -16,7 +16,7 @@ class Plant:
         return self.__height
 
     def set_age(self, age) -> int:
-        if age <= 50 and age >= 0:
+        if age >= 0:
             self.__age = age
             return 0
         else:
@@ -49,6 +49,8 @@ if __name__ == "__main__":
         print(f'Age updated : {plant2.get_age()}days [OK]')
     print("Current plants : ")
     if plant1.get_height() > -1 and plant1.get_age() > -1:
-        print(f'{plant1.name} ({plant1.get_height()}cm, {plant1.get_age()}days)')
+        print(f'{plant1.name} ({plant1.get_height()}cm, '
+              f'{plant1.get_age()}days)')
     if plant2.get_height() > -1 and plant2.get_age() > -1:
-        print(f'{plant2.name} ({plant2.get_height()}cm, {plant2.get_age()}days)')
+        print(f'{plant2.name} ({plant2.get_height()}cm, '
+              f'{plant2.get_age()}days)')

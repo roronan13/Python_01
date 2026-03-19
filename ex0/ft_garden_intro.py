@@ -10,4 +10,4 @@ def display() -> None:
 if __name__ == "__main__":
     print("-- Hello ! --")
     display()
-    print("-- End of program. --")
+    print("-- End of program --")
