@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 def display() -> None:
-    plant = "chardon"
+    name = "chardon"
     height = 1
     age = 1
-    print(f'Plant : {plant}')
+    print(f'Plant : {name}')
     print(f'Height : {height}m')
     print(f'Age : {age}y')
 

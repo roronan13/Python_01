@@ -1,36 +1,31 @@
+#!/usr/bin/env python3
+
 class Plant:
     def __init__(self, name: str, height: int, plant_age: int) -> None:
         self.name = name
         self.height = height
         self.plant_age = plant_age
 
-    def grow(self, days) -> None:
-        self.height += days
+    def grow(self, days: int) -> None:
+        self.height += days * 2
 
-    def age(self, days) -> None:
+    def age(self, days: int) -> None:
         self.plant_age += days
 
-    def get_info(self, days) -> None:
-        print(f'Growth these last {days} days : +{days}cm')
+    def show(self) -> None:
+        print(f"{self.name}: {self.height}cm, {self.plant_age} days old")
 
 
 if __name__ == "__main__":
-    print(" -- Day 1 -- ")
-    plant_1 = Plant("Rose", 100, 2)
-    plant_2 = Plant("Jasmin", 50, 6)
-    plant_3 = Plant("Lila", 200, 5)
-    print(f'{plant_1.name}: {plant_1.height}cm, {plant_1.plant_age} days old')
-    print(f'{plant_2.name}: {plant_2.height}cm, {plant_2.plant_age} days old')
-    print(f'{plant_3.name}: {plant_3.height}cm, {plant_3.plant_age} days old')
+    plant = Plant("Rose", 10, 5)
+    print(" === Garden Plant Growth === ")
+    print("\n = Day 1 = ")
+    plant.show()
     days = int(input("How many days spent ? "))
-    plant_1.grow(days)
-    plant_1.age(days)
-    plant_2.grow(days)
-    plant_2.age(days)
-    plant_3.grow(days)
-    plant_3.age(days)
-    print(f' -- Day {days + 1} -- ')
-    print(f'{plant_1.name}: {plant_1.height}cm, {plant_1.plant_age} days old')
-    print(f'{plant_2.name}: {plant_2.height}cm, {plant_2.plant_age} days old')
-    print(f'{plant_3.name}: {plant_3.height}cm, {plant_3.plant_age} days old')
-    plant_1.get_info(days)
+    i = 1
+    for i in range(i, days + 1):
+        print(" = Day", i + 1, "= ")
+        plant.grow(1)
+        plant.age(1)
+        plant.show()
+    print(f"\nGrowth this week : {days * 2}cm")

@@ -1,8 +1,11 @@
 class Plant:
-    def __init__(self, name, height, age) -> None:
+    def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
+
+    def show(self) -> None:
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 if __name__ == "__main__":
@@ -10,6 +13,6 @@ if __name__ == "__main__":
     plant_1 = Plant("Rose", 100, 2)
     plant_2 = Plant("Jasmin", 50, 6)
     plant_3 = Plant("Lila", 200, 5)
-    print(f'{plant_1.name}: {plant_1.height}cm, {plant_1.age} days old')
-    print(f'{plant_2.name}: {plant_2.height}cm, {plant_2.age} days old')
-    print(f'{plant_3.name}: {plant_3.height}cm, {plant_3.age} days old')
+    plant_1.show()
+    plant_2.show()
+    plant_3.show()
