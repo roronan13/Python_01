@@ -86,56 +86,59 @@ class Owner:
 
 
 class GardenManager:
+    plants = []
+    owners = []
+    number_of_owners = 0
+    number_of_plants = 0
+
     def __init__(self, name: str) -> None:
         self.name = name
-        self.owners = []
-        self.plants = []
-        self.number_of_owners = 0
-        self.number_of_plants = 0
 
-    def create_garden_network(self, owner: Owner) -> None:
-        self.owners.append(owner)
-        self.number_of_owners += 1
+    @classmethod
+    def create_garden_network(cls, owner: Owner) -> None:
+        cls.owners.append(owner)
+        cls.number_of_owners += 1
 
-    def GetNumberOwners(self) -> int:
-        return self.number_of_owners
+    @classmethod
+    def GetNumberOwners(cls) -> int:
+        return cls.number_of_owners
 
-    def AddPlant(self, plant: Plant, owner: Owner) -> None:
-        self.plants.append(plant)
-        self.number_of_plants += 1
-        self.specific_type = plant.GetSpecificType()
-        for self.owner in self.owners:
-            if self.owner == owner:
-                owner.plants.append(plant)
-                owner.number_of_plants += 1
-                owner.total_prize += plant.GetPrizePoints()
-                if self.specific_type == "regular":
-                    owner.regular += 1
-                if self.specific_type == "flowering":
-                    owner.flowering += 1
-                if self.specific_type == "prize":
-                    owner.prize += 1
+    def AddPlant(cls, plant: Plant, owner: Owner) -> None:
+        cls.plants.append(plant)
+        cls.number_of_plants += 1
+        specific_type = plant.GetSpecificType()
+        for owners in cls.owners:
+            if owners == owner:
+                owners.plants.append(plant)
+                owners.number_of_plants += 1
+                owners.total_prize += plant.GetPrizePoints()
+                if specific_type == "regular":
+                    owners.regular += 1
+                if specific_type == "flowering":
+                    owners.flowering += 1
+                if specific_type == "prize":
+                    owners.prize += 1
         print(f'Added {plant.plant_name} to {owner.owner_name}\'s garden')
 
-    def PrintGrow(self) -> None:
-        for owner in self.owners:
+    def PrintGrow(cls) -> None:
+        for owner in cls.owners:
             print(f"\n{owner.owner_name} is helping all plants grow...")
             for plant in owner.plants:
                 print(f"{plant.plant_name} grew 1cm")
                 plant.Grow()
 
-    def HeightTest(self) -> bool:
+    def HeightTest(cls) -> bool:
         is_okay = True
-        for plant in self.plants:
+        for plant in cls.plants:
             if plant.GetHeight() < 0 or plant.GetHeight() > 100:
                 is_okay = False
         return is_okay
 
-    def PrintPrizes(self) -> None:
+    def PrintPrizes(cls) -> None:
         i = 0
         print("Garden scores - ", end="")
-        for owner in self.owners:
-            if i < self.number_of_owners - 1:
+        for owner in cls.owners:
+            if i < cls.number_of_owners - 1:
                 print(f"{owner.owner_name}: {owner.total_prize}, ", end="")
             else:
                 print(f"{owner.owner_name}: {owner.total_prize}", end="")
