@@ -99,10 +99,6 @@ class GardenManager:
         cls.owners.append(owner)
         cls.number_of_owners += 1
 
-    @classmethod
-    def GetNumberOwners(cls) -> int:
-        return cls.number_of_owners
-
     def AddPlant(cls, plant: Plant, owner: Owner) -> None:
         cls.plants.append(plant)
         cls.number_of_plants += 1
@@ -127,23 +123,30 @@ class GardenManager:
                 print(f"{plant.plant_name} grew 1cm")
                 plant.Grow()
 
-    def HeightTest(cls) -> bool:
-        is_okay = True
-        for plant in cls.plants:
-            if plant.GetHeight() < 0 or plant.GetHeight() > 100:
-                is_okay = False
-        return is_okay
+    class GardenStats:
+        def __init__(self, manager) -> None:
+            self.manager = manager
 
-    def PrintPrizes(cls) -> None:
-        i = 0
-        print("Garden scores - ", end="")
-        for owner in cls.owners:
-            if i < cls.number_of_owners - 1:
-                print(f"{owner.owner_name}: {owner.total_prize}, ", end="")
-            else:
-                print(f"{owner.owner_name}: {owner.total_prize}", end="")
-            i += 1
-        print("")
+        def HeightTest(self) -> bool:
+            is_okay = True
+            for plant in self.manager.plants:
+                if plant.GetHeight() < 0 or plant.GetHeight() > 100:
+                    is_okay = False
+            return is_okay
+
+        def PrintPrizes(self) -> None:
+            i = 0
+            print("Garden scores - ", end="")
+            for owner in self.manager.owners:
+                if i < self.manager.number_of_owners - 1:
+                    print(f"{owner.owner_name}: {owner.total_prize}, ", end="")
+                else:
+                    print(f"{owner.owner_name}: {owner.total_prize}", end="")
+                i += 1
+            print("")
+
+        def GetNumberOwners(self) -> int:
+            return self.manager.number_of_owners
 
 
 if __name__ == "__main__":
@@ -173,6 +176,7 @@ if __name__ == "__main__":
             print(plant.PrintInfo())
         print(owner.PrintReport())
         print(owner.PrintSpecificNumber())
-    print(f"\nHeight validation test : {My_Garden.HeightTest()}")
-    My_Garden.PrintPrizes()
-    print(f'Total gardens managed : {My_Garden.GetNumberOwners()}')
+    Stats = My_Garden.GardenStats(My_Garden)
+    print(f"\nHeight validation test : {Stats.HeightTest()}")
+    Stats.PrintPrizes()
+    print(f'Total gardens managed : {Stats.GetNumberOwners()}')
