@@ -1,15 +1,27 @@
+#!/usr/bin/env python3
+
 class Plant:
+    plants = []
+
     def __init__(self, name: str, height: int, plant_age: int) -> None:
         self.name = name
         self.height = height
         self.plant_age = plant_age
+        self.stats = self.__class__.Stats()
+        Plant.plants.append(self)
 
-    def show(self) -> None:
+    def Show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.plant_age} \
 days old")
+        self.stats.AddShow()
 
     def Grow(self) -> None:
-        self.__height += 1
+        self.height += 1
+        self.stats.AddGrow()
+
+    def Age(self) -> None:
+        self.plant_age += 1
+        self.stats.AddAge()
 
     @classmethod
     def NoInfos(cls):
@@ -29,12 +41,21 @@ days old")
             return True
         else:
             return False
-        
+
     class Stats:
-        def __init__(self, plant) -> None:
-            self.grow_nbr = 0
-            self.age_nbr = 0
-            self.show_nbr = 0
+        def __init__(self) -> None:
+            self._grow_nbr = 0
+            self._age_nbr = 0
+            self._show_nbr = 0
+
+        def AddGrow(self) -> None:
+            self._grow_nbr += 1
+
+        def AddAge(self) -> None:
+            self._age_nbr += 1
+
+        def AddShow(self) -> None:
+            self._show_nbr += 1
 
 
 class Tree(Plant):
@@ -43,14 +64,23 @@ class Tree(Plant):
         super().__init__(name, height, plant_age)
         self.trunk_diameter = trunk_diameter
 
-    def produce_shade(self) -> None:
+    def ProduceShade(self) -> None:
         print(f"   [Asking the {self.name} to produce shade...]")
         print(f"{self.name} now produces a shade of {self.height}cm long \
 and {self.trunk_diameter}cm wide")
+        self.stats.AddShade()
 
-    def show(self) -> None:
-        super().show()
+    def Show(self) -> None:
+        super().Show()
         print(f"Trunk diameter : {self.trunk_diameter}cm")
+
+    class Stats(Plant.Stats):
+        def __init__(self) -> None:
+            super().__init__()
+            self._shade_nbr = 0
+
+        def AddShade(self) -> None:
+            self._shade_nbr += 1
 
 
 class Flower(Plant):
@@ -60,28 +90,34 @@ class Flower(Plant):
         self.color = color
         self.bloomed = bloomed
 
-    def bloom(self) -> None:
+    def Bloom(self) -> None:
         print(f"   [Asking the {self.name} to bloom...]")
         self.bloomed = True
 
-    def is_bloomed(self) -> None:
+    def IsBloomed(self) -> None:
         if self.bloomed:
             print(f'{self.name} is blooming beautifully !')
         else:
             print(f'{self.name} is not blooming yet !')
 
-    def show(self) -> None:
-        super().show()
+    def Show(self) -> None:
+        super().Show()
         print(f"Color : {self.color}")
-        self.is_bloomed()
+        self.IsBloomed()
 
 
 class Seed(Flower):
     def __init__(self, name: str, height: int, plant_age: int, color: str, bloomed: bool = False) -> None:
         super().__init__(name, height, plant_age, color, bloomed)
-        seeds_nbr = 0
+        self.seeds_nbr = 0
 
-    
+    def Bloom(self) -> None:
+        super().Bloom()
+        self.seeds_nbr += 10
+
+    def Show(self) -> None:
+        super().Show()
+        print(f"Seeds : {self.seeds_nbr}")
 
 
 # class FloweringPlant(Plant):
@@ -212,6 +248,20 @@ class Seed(Flower):
 
 
 if __name__ == "__main__":
+    print(" === Garden Statistics === \n")
+    Lila = Flower("Lila", 10, 50, "purple")
+    Oak = Tree("Oak", 1000, 500, 30)
+    Sunflower = Seed("Sunflower", 30, 100, "yellow")
+    print(" = Check year old = ")
+    for plant in Plant.plants:
+        print(f"Is {plant.name} more than a year \
+? -> {plant.CheckAge(plant.plant_age)}")
+    print(" = Flower ")
+        
+
+    
+    
+    
     My_Garden = GardenManager("My Garden")
     print("=== Garden Management System Demo ===\n")
     Ronan = Owner("Ronan")
