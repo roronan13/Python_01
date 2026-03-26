@@ -89,6 +89,5 @@ if __name__ == "__main__":
     Oak.produce_shade()
     print("\n === Vegetable === ")
     Tomato.show()
-    Tomato.grow_and_age(int(input(f"How many days \
-spent for {Tomato.name} ? ")))
+    Tomato.grow_and_age(10)
     Tomato.show()
