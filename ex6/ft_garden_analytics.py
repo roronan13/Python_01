@@ -129,7 +129,7 @@ class Seed(Flower):
         print(f"Seeds : {self.seeds_nbr}")
 
 
-def DisplayStats(plant: Plant) -> None:
+def Stats(plant: Plant) -> None:
     plant.stats.DisplayStats()
 
 
@@ -145,26 +145,26 @@ if __name__ == "__main__":
 ? -> {plant.CheckAge(plant.plant_age)}")
     print("\n = Flower ")
     Lila.Show()
-    DisplayStats(Lila)
+    Stats(Lila)
     Lila.Grow()
     Lila.Bloom()
     Lila.Show()
-    DisplayStats(Lila)
+    Stats(Lila)
     print("\n = Tree ")
     Oak.Show()
-    DisplayStats(Oak)
+    Stats(Oak)
     Oak.ProduceShade()
-    DisplayStats(Oak)
+    Stats(Oak)
     print("\n = Seed ")
     Sunflower.Show()
     Sunflower.Grow()
     Sunflower.Age()
     Sunflower.Bloom()
     Sunflower.Show()
-    DisplayStats(Sunflower)
+    Stats(Sunflower)
     print("\n = Anonymous ")
     Unknown.Show()
-    DisplayStats(Unknown)
+    Stats(Unknown)
 
 
 # class FloweringPlant(Plant):
