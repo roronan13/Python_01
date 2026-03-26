@@ -28,7 +28,7 @@ class Plant:
     def get_age(self) -> int:
         return self.__age
 
-    def SecurePlant(self, height: int, age: int) -> int:
+    def secure_plant(self, height: int, age: int) -> int:
         is_valid = 0
         if self.set_height(height) < 0:
             print("Security : wrong height !")
@@ -43,13 +43,13 @@ if __name__ == "__main__":
     print(" === Garden Security System === \n")
     plant1 = Plant("Rose", -1, -1)
     print(f"{plant1.name} :")
-    if plant1.SecurePlant(int(input("Height : ")), int(input("Age : "))) >= 0:
+    if plant1.secure_plant(int(input("Height : ")), int(input("Age : "))) >= 0:
         print(f'\nPlant created : {plant1.name}')
         print(f'Height updated : {plant1.get_height()}cm [OK]')
         print(f'Age updated : {plant1.get_age()}days [OK]')
     plant2 = Plant("Lila", -1, -1)
     print(f"\n{plant2.name} :")
-    if plant2.SecurePlant(int(input("Height : ")), int(input("Age : "))) >= 0:
+    if plant2.secure_plant(int(input("Height : ")), int(input("Age : "))) >= 0:
         print(f'\nPlant created : {plant2.name}')
         print(f'Height updated : {plant2.get_height()}cm [OK]')
         print(f'Age updated : {plant2.get_age()}days [OK]')
