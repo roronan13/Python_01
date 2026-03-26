@@ -21,10 +21,10 @@ if __name__ == "__main__":
     print(" === Garden Plant Growth === ")
     print("\n = Day 1 = ")
     plant.show()
-    days = int(input("How many days spent ? "))
-    i = 1
-    for i in range(i, days + 1):
-        print(" = Day", i + 1, "= ")
+    days = 7
+    i = 2
+    for i in range(i, days + i):
+        print(" = Day", i, "= ")
         plant.grow(1)
         plant.age(1)
         plant.show()
