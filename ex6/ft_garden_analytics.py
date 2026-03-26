@@ -57,6 +57,10 @@ days old")
         def AddShow(self) -> None:
             self._show_nbr += 1
 
+        def DisplayStats(self) -> None:
+            print(f" -- Stats : {self._grow_nbr} grow, {self._age_nbr} \
+age, {self._show_nbr} show")
+
 
 class Tree(Plant):
     def __init__(self, name: str, height: int, plant_age: int,
@@ -81,6 +85,10 @@ and {self.trunk_diameter}cm wide")
 
         def AddShade(self) -> None:
             self._shade_nbr += 1
+
+        def DisplayStats(self) -> None:
+            super().DisplayStats()
+            print(f"{self._shade_nbr} shade")
 
 
 class Flower(Plant):
@@ -107,7 +115,8 @@ class Flower(Plant):
 
 
 class Seed(Flower):
-    def __init__(self, name: str, height: int, plant_age: int, color: str, bloomed: bool = False) -> None:
+    def __init__(self, name: str, height: int, plant_age: int,
+                 color: str, bloomed: bool = False) -> None:
         super().__init__(name, height, plant_age, color, bloomed)
         self.seeds_nbr = 0
 
@@ -118,6 +127,40 @@ class Seed(Flower):
     def Show(self) -> None:
         super().Show()
         print(f"Seeds : {self.seeds_nbr}")
+
+
+if __name__ == "__main__":
+    print(" === Garden Statistics === \n")
+    Lila = Flower("Lila", 10, 50, "purple")
+    Oak = Tree("Oak", 1000, 500, 30)
+    Sunflower = Seed("Sunflower", 30, 100, "yellow")
+    Unknown = Plant.NoInfos()
+    print(" = Check year old = ")
+    for plant in Plant.plants:
+        print(f"Is {plant.name} more than a year \
+? -> {plant.CheckAge(plant.plant_age)}")
+    print("\n = Flower ")
+    Lila.Show()
+    Lila.stats.DisplayStats()
+    Lila.Grow()
+    Lila.Bloom()
+    Lila.Show()
+    Lila.stats.DisplayStats()
+    print("\n = Tree ")
+    Oak.Show()
+    Oak.stats.DisplayStats()
+    Oak.ProduceShade()
+    Oak.stats.DisplayStats()
+    print("\n = Seed ")
+    Sunflower.Show()
+    Sunflower.Grow()
+    Sunflower.Age()
+    Sunflower.Bloom()
+    Sunflower.Show()
+    Sunflower.stats.DisplayStats()
+    print("\n = Anonymous ")
+    Unknown.Show()
+    Unknown.stats.DisplayStats()
 
 
 # class FloweringPlant(Plant):
@@ -154,7 +197,8 @@ class Seed(Flower):
 
 #     def PrintInfo(self) -> str:
 #         return (f"- {self.name} : {self.GetHeight()}cm, {self.color} "
-#                 f"flowers {self.PrintFlowered()}, Prize points : {self.prize}")
+#                 f"flowers {self.PrintFlowered()}, Prize \
+# points : {self.prize}")
 
 #     @staticmethod
 #     def GetSpecificType() -> str:
@@ -237,7 +281,8 @@ class Seed(Flower):
 #             print("Garden scores - ", end="")
 #             for owner in self.manager.owners:
 #                 if i < self.manager.number_of_owners - 1:
-#                     print(f"{owner.owner_name}: {owner.total_prize}, ", end="")
+#                     print(f"{owner.owner_name}: \
+# {owner.total_prize}, ", end="")
 #                 else:
 #                     print(f"{owner.owner_name}: {owner.total_prize}", end="")
 #                 i += 1
@@ -246,49 +291,33 @@ class Seed(Flower):
 #         def GetNumberOwners(self) -> int:
 #             return self.manager.number_of_owners
 
-
-if __name__ == "__main__":
-    print(" === Garden Statistics === \n")
-    Lila = Flower("Lila", 10, 50, "purple")
-    Oak = Tree("Oak", 1000, 500, 30)
-    Sunflower = Seed("Sunflower", 30, 100, "yellow")
-    print(" = Check year old = ")
-    for plant in Plant.plants:
-        print(f"Is {plant.name} more than a year \
-? -> {plant.CheckAge(plant.plant_age)}")
-    print(" = Flower ")
-        
-
-    
-    
-    
-    My_Garden = GardenManager("My Garden")
-    print("=== Garden Management System Demo ===\n")
-    Ronan = Owner("Ronan")
-    Jean = Owner("Jean")
-    Jacques = Owner("Jacques")
-    Lila = Plant("Lila", 10, 5)
-    Rose = FloweringPlant("Rose", 20, 10, True, "red")
-    Tulipe = PrizeFlower("Tulipe", 50, 50, False, "blue", 10)
-    Jasmin = FloweringPlant("Jasmin", 90, 80, False, "yellow")
-    Oui = PrizeFlower("Oui", 10, 5, True, "grey", 15)
-    My_Garden.create_garden_network(Ronan)
-    My_Garden.create_garden_network(Jean)
-    My_Garden.create_garden_network(Jacques)
-    My_Garden.AddPlant(Lila, Ronan)
-    My_Garden.AddPlant(Rose, Jacques)
-    My_Garden.AddPlant(Tulipe, Ronan)
-    My_Garden.AddPlant(Jasmin, Jacques)
-    My_Garden.AddPlant(Oui, Jacques)
-    My_Garden.PrintGrow()
-    for owner in My_Garden.owners:
-        print(f'\n    === {owner.owner_name}\'s Garden Report ===')
-        print("Plants in garden:")
-        for plant in owner.plants:
-            print(plant.PrintInfo())
-        print(owner.PrintReport())
-        print(owner.PrintSpecificNumber())
-    Stats = My_Garden.GardenStats(My_Garden)
-    print(f"\nHeight validation test : {Stats.HeightTest()}")
-    Stats.PrintPrizes()
-    print(f'Total gardens managed : {Stats.GetNumberOwners()}')
+    # My_Garden = GardenManager("My Garden")
+    # print("=== Garden Management System Demo ===\n")
+    # Ronan = Owner("Ronan")
+    # Jean = Owner("Jean")
+    # Jacques = Owner("Jacques")
+    # Lila = Plant("Lila", 10, 5)
+    # Rose = FloweringPlant("Rose", 20, 10, True, "red")
+    # Tulipe = PrizeFlower("Tulipe", 50, 50, False, "blue", 10)
+    # Jasmin = FloweringPlant("Jasmin", 90, 80, False, "yellow")
+    # Oui = PrizeFlower("Oui", 10, 5, True, "grey", 15)
+    # My_Garden.create_garden_network(Ronan)
+    # My_Garden.create_garden_network(Jean)
+    # My_Garden.create_garden_network(Jacques)
+    # My_Garden.AddPlant(Lila, Ronan)
+    # My_Garden.AddPlant(Rose, Jacques)
+    # My_Garden.AddPlant(Tulipe, Ronan)
+    # My_Garden.AddPlant(Jasmin, Jacques)
+    # My_Garden.AddPlant(Oui, Jacques)
+    # My_Garden.PrintGrow()
+    # for owner in My_Garden.owners:
+    #     print(f'\n    === {owner.owner_name}\'s Garden Report ===')
+    #     print("Plants in garden:")
+    #     for plant in owner.plants:
+    #         print(plant.PrintInfo())
+    #     print(owner.PrintReport())
+    #     print(owner.PrintSpecificNumber())
+    # Stats = My_Garden.GardenStats(My_Garden)
+    # print(f"\nHeight validation test : {Stats.HeightTest()}")
+    # Stats.PrintPrizes()
+    # print(f'Total gardens managed : {Stats.GetNumberOwners()}')
